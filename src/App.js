@@ -1,9 +1,9 @@
 function App() {
   return (
-    <div className="App">
+    <div>
       <h1>GitHub App</h1>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
