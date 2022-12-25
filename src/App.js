@@ -27,14 +27,20 @@ class App extends React.Component {
     fetch(`${baseURL}${value}`)
       .then((response) => {
         if (!response.ok) {
-          this.setState({ userInfo: null })
           throw new Error('Usuario não encontrado')
         }
 
         return response.json()
       })
       .then((data) => {
-        this.setState({ userInfo: { ...data } })
+        this.setState({ userInfo: {
+          name: data.name,
+          photo: data.avatar_url,
+          link: data.html_url,
+          repos: data.public_repos,
+          following: data.following,
+          followers: data.followers
+        }})
       })
       .catch((error) => console.log(error))
   }
