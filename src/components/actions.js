@@ -1,12 +1,10 @@
-'use strict'
-
 import React from 'react'
 
-const Actions = () => {
+const Actions = ({ handleShowRepos, handleShowStarred }) => {
   return (
     <div className='actions'>
-      <button>Ver repositórios</button>
-      <button>Ver favoritos</button>
+      <button onClick={handleShowRepos}>Ver repositórios</button>
+      <button onClick={handleShowStarred}>Ver favoritos</button>
     </div>
   )
 }
