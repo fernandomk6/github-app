@@ -15,18 +15,23 @@ class App extends React.Component {
     this.handleShowRepos = this.handleShowRepos.bind(this)
   }
 
+  getGitHubApiUrl (username, type) {
+    const internalType = type ? `/${type}` : ''
+    return `https://api.github.com/users/${username}${internalType}`
+  }
+
   async handleSearch (e) {
     const keyCode = e.which || e.keyCode
     const enter = 13
     const value = e.target.value
-    const baseURL = 'https://api.github.com/users/'
 
     if (keyCode !== enter) {
       return
     }
 
     try {
-      const userData = await (await fetch(`${baseURL}${value}`)).json()
+      const url = this.getGitHubApiUrl(value)
+      const userData = await (await fetch(url)).json()
 
       if (!userData.login) {
         throw new Error('Usuário não encontrado')
@@ -58,7 +63,8 @@ class App extends React.Component {
   handleShowRepos (type) {
     return async () => {
       const login = this.state.userInfo.login
-      const repos = await (await (fetch(`https://api.github.com/users/${login}/${type}`))).json()
+      const url = this.getGitHubApiUrl(login, type)
+      const repos = await (await (fetch(url))).json()
   
       this.setState({ 
         [type]: repos.map(repo => ({
@@ -70,18 +76,6 @@ class App extends React.Component {
       })
     }
   }
-
-  // async handleShowStarred () {
-  //   const login = this.state.userInfo.login
-  //   const starred = await (await (fetch(`https://api.github.com/users/${login}/starred`))).json()
-  //   const newStarred = starred.map(starred => ({
-  //     id: starred.id,
-  //     link: starred.html_url,
-  //     name: starred.name
-  //   }))
-
-  //   this.setState({ starred: newStarred, repos: [] })
-  // }
   
   render () {
     return (
