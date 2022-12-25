@@ -13,7 +13,6 @@ class App extends React.Component {
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleShowRepos = this.handleShowRepos.bind(this)
-    this.handleShowStarred = this.handleShowStarred.bind(this)
   }
 
   async handleSearch (e) {
@@ -55,29 +54,34 @@ class App extends React.Component {
       })
     }
   }
-  async handleShowRepos () {
-    const login = this.state.userInfo.login
-    const repos = await (await (fetch(`https://api.github.com/users/${login}/repos`))).json()
-    const newRepos = repos.map(repo => ({
-      id: repo.id,
-      link: repo.html_url,
-      name: repo.name
-    }))
 
-    this.setState({ repos: newRepos, starred: [] })
+  handleShowRepos (type) {
+    return async () => {
+      const login = this.state.userInfo.login
+      const repos = await (await (fetch(`https://api.github.com/users/${login}/${type}`))).json()
+  
+      this.setState({ 
+        [type]: repos.map(repo => ({
+          id: repo.id,
+          link: repo.html_url,
+          name: repo.name
+        })), 
+        [type === 'starred' ? 'repos' : 'starred']: [] 
+      })
+    }
   }
 
-  async handleShowStarred () {
-    const login = this.state.userInfo.login
-    const starred = await (await (fetch(`https://api.github.com/users/${login}/starred`))).json()
-    const newStarred = starred.map(starred => ({
-      id: starred.id,
-      link: starred.html_url,
-      name: starred.name
-    }))
+  // async handleShowStarred () {
+  //   const login = this.state.userInfo.login
+  //   const starred = await (await (fetch(`https://api.github.com/users/${login}/starred`))).json()
+  //   const newStarred = starred.map(starred => ({
+  //     id: starred.id,
+  //     link: starred.html_url,
+  //     name: starred.name
+  //   }))
 
-    this.setState({ starred: newStarred, repos: [] })
-  }
+  //   this.setState({ starred: newStarred, repos: [] })
+  // }
   
   render () {
     return (
@@ -86,8 +90,8 @@ class App extends React.Component {
         repos={this.state.repos}
         starred={this.state.starred}
         handleSearch={this.handleSearch}
-        handleShowRepos={this.handleShowRepos}
-        handleShowStarred={this.handleShowStarred}
+        handleShowRepos={this.handleShowRepos('repos')}
+        handleShowStarred={this.handleShowRepos('starred')}
       />
     )
   }

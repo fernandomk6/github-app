@@ -8,6 +8,7 @@
 - Fazer request dos dados do usuário
 - Popular corretamente o componente `UserInfo`
 - Estrutura de callbacks para buscar repositórios e favoritos
+- Métodos para buscar repositórios e favoritos
 
 
 ## Anotações sobre coisas aprendidas durante o desenvolvimento dessa aplicação
