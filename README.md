@@ -11,6 +11,26 @@
 - Métodos para buscar repositórios e favoritos
 - Buscar repositórios do usuário buscado
 
+### Melhorias
+
+- Desabilitar campo de busca enquanto o resultado é processado
+
+```js
+// dentro da função handle alguma coisa
+e.target.disabled = true
+
+// ...codigo do evento
+
+// após tudo ter ocorrido (sucesso ou falha)
+e.target.disabled = false
+
+// opcional
+e.target.value = ''
+```
+
+- Loading enquanto estivermos buscando os dados
+
+
 ## Anotações sobre coisas aprendidas durante o desenvolvimento dessa aplicação
 
 - Primeiro crie toda a marcação HTML stateless, e depois, transforme cada parte
@@ -68,6 +88,9 @@ class MainComponent {
 
 *Sintaxe foi escrita de forma simplificada apenas para entender a ideia.*
 
-
+- Sempre optite por manipular o objeto de evento (e) do react, e não o nativo do
+browser, por o `event` objeto do react, é padronizado para funcionar em todos
+os browsers, enquanto o `event` fornecedido por um broswer, pode não funcionar
+em outros.
 
 

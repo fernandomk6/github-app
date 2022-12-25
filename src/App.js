@@ -9,7 +9,8 @@ class App extends React.Component {
     this.state = {
       userInfo: null,
       repos: [],
-      starred: []
+      starred: [],
+      isFetching: false
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleShowRepos = this.handleShowRepos.bind(this)
@@ -29,6 +30,7 @@ class App extends React.Component {
       return
     }
 
+    this.setState({ isFetching: true })
     try {
       const url = this.getGitHubApiUrl(value)
       const userData = await (await fetch(url)).json()
@@ -48,7 +50,6 @@ class App extends React.Component {
       }
 
       this.setState({ userInfo, repos: [], starred: [] })
-
     } catch (error) {
       console.log(error)
 
@@ -58,6 +59,8 @@ class App extends React.Component {
         starred: []
       })
     }
+
+    this.setState({ isFetching: false })
   }
 
   handleShowRepos (type) {
@@ -86,6 +89,7 @@ class App extends React.Component {
         handleSearch={this.handleSearch}
         handleShowRepos={this.handleShowRepos('repos')}
         handleShowStarred={this.handleShowRepos('starred')}
+        isFetching={this.state.isFetching}
       />
     )
   }
