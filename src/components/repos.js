@@ -1,5 +1,3 @@
-'use strict'
-
 import React from 'react'
 
 const Repos = ({ className, title, repos }) => {
@@ -9,7 +7,7 @@ const Repos = ({ className, title, repos }) => {
       <ul>
         {repos.map((repo) => (
           <li key={repo.id}>
-            <a href={repo.link} target='_blank'>{repo.name}</a>
+            <a href={repo.link} target='_blank' rel='noreferrer'>{repo.name}</a>
           </li>
         ))}
       </ul>

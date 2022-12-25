@@ -8,11 +8,6 @@
 - Fazer request dos dados do usuário
 - Popular corretamente o componente `UserInfo`
 
-- Desafio: desenvolva a funcionalidade de buscar repos e starred repos e renderize-os
-corretamente.
-- Corrija o componente user-info para não usar as propriedade exatas vindas do request, deixe
-o totalmente independente
-
 ## Anotações sobre coisas aprendidas durante o desenvolvimento dessa aplicação
 
 - Primeiro crie toda a marcação HTML stateless, e depois, transforme cada parte
