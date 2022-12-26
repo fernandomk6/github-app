@@ -1,5 +1,14 @@
 # GitHub App
 
+Nessa aplicação é possivel pesquisar por um usuário no gitHub e obter
+suas informações, como foto, repositórios, favoritos, número de seguidores, quantos
+perfil esse usuário segue... dentre outras coisas.
+
+## Tecnologias usadas
+
+- React (class components)
+- gitHib Rest API [doc](https://docs.github.com/pt/rest)
+
 ## Passos
 
 - Marcação HTML
