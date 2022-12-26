@@ -6,7 +6,7 @@ perfil esse usuário segue... dentre outras coisas.
 
 ## Tecnologias usadas
 
-- React (class components)
+- React (class components 👴)
 - gitHib Rest API [doc](https://docs.github.com/pt/rest)
 
 ## Passos
